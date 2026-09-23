@@ -1,99 +1,118 @@
-# CMS Content Audit Dashboard
+﻿# Senriva Asset Cleanup Analyzer
 
-A full-stack CMS content quality dashboard built as a public demonstration of modern web development, API integration, accessibility, and content-management tooling.
-
-This project uses entirely fictional data and contains no proprietary or employer-owned source code.
+Dependency-aware HubSpot asset management demo for identifying orphaned, stale, missing, duplicated, and archived HubFS and Design Manager assets before cleanup.
 
 ## Features
 
-- CMS content inventory
-- Search and server-side filtering
-- Publishing status tracking
-- SEO quality scoring
-- Accessibility issue tracking
-- Broken-link detection metrics
-- Content-type filtering
-- Responsive dashboard interface
-- REST API
-- Accessible semantic UI
+- HubFS asset inventory
+- Design Manager template and module inventory
+- Reference counts
+- Orphaned asset detection
+- Stale asset detection
+- Missing dependency detection
+- Archive awareness
+- Duplicate grouping
+- Cleanup candidate classification
+- Estimated recoverable storage
+- Referenced-by inspection
+- Search and filtering
+- Non-destructive cleanup preview
+
+## Cleanup Philosophy
+
+An old file is not automatically safe to remove.
+
+Cleanup decisions should consider:
+
+- active references
+- dependency usage
+- archive coverage
+- missing live assets
+- duplicate or legacy status
+- environment context
+
+## Archive vs. Live Usage
+
+The analyzer distinguishes between:
+
+- assets preserved in archive history
+- assets currently referenced by live portal content
+- orphaned assets with no active dependencies
+- missing assets that are still referenced
+- cleanup candidates that are both unreferenced and archived
+
+This allows cleanup recommendations to be based on actual portal usage rather than age alone.
 
 ## Technology
 
-### Frontend
 - React
 - TypeScript
 - Vite
-- CSS
-
-### Backend
 - Node.js
 - Express
-- TypeScript
 - REST API
 
-## Architecture
+## API
 
-The project is split into two applications:
+GET /api/health
 
-client/
-- React + TypeScript frontend
+Returns API health.
 
-server/
-- Node.js + Express API
+GET /api/assets
 
-The frontend retrieves content inventory and summary data through REST endpoints exposed by the Express server.
+Returns fictional HubFS and Design Manager asset inventory data.
 
-## API endpoints
+GET /api/summary
 
-- GET /api/health
-- GET /api/content
-- GET /api/content?search=platform
-- GET /api/content?status=Published
-- GET /api/content?type=Landing%20Page
-- GET /api/summary
+Returns asset-analysis metrics including total assets, storage, orphaned items, stale items, missing dependencies, duplicate groups, and potential recoverable storage.
 
-## Running locally
+## Local Development
 
-Install dependencies:
+Backend:
 
-npm install
-npm install --prefix client
-npm install --prefix server
-
-Start both applications:
-
-npm run dev
+    Set-Location "D:\Projects\senriva-asset-analyzer\server"
+    npm install
+    npm run dev
 
 Frontend:
 
+    Set-Location "D:\Projects\senriva-asset-analyzer\client"
+    npm install
+    npm run dev
+
+Open:
+
 http://localhost:5173
 
-API:
+## Safety
 
-http://localhost:4000
+This public demo is analysis-only.
 
-## Purpose
+It does not:
 
-This project was created as a standalone portfolio demonstration of techniques I use when building production CMS and web applications, including:
+- delete HubSpot assets
+- overwrite files
+- publish content
+- modify Design Manager artifacts
+- perform destructive cleanup actions
 
-- React component architecture
-- TypeScript
-- Node.js APIs
-- Content inventory management
-- Search and filtering
-- CMS-oriented data modeling
-- Responsive interfaces
-- Accessibility-conscious development
-- Quality and analytics dashboards
+A production implementation should keep destructive actions previewed, explicitly gated, auditable, and disabled by default.
 
-All organizations, content records, metrics, and identifiers in this repository are fictional.
+## Demo Data
+
+This repository uses fictional demonstration data and contains no proprietary employer code, credentials, customer data, or production HubSpot content.
+
+## Senriva
+
+This project is part of an early Senriva portal-intelligence suite covering:
+
+- asset management
+- dependency analysis
+- content auditing
+- backup and recovery
+- migration readiness
+- cross-account reconstruction
 
 ## Author
 
 Patrick Brady
-
-Senior HubSpot / Full-Stack Developer
-
-## Screenshot
-
-![CMS Content Audit Dashboard](Dashboardscreenshot.png)
